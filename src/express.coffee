@@ -2,10 +2,10 @@ path               = require 'path'
 cors               = require 'cors'
 morgan             = require 'morgan'
 express            = require 'express'
+bodyParser         = require 'body-parser'
 compression        = require 'compression'
 OctobluRaven       = require 'octoblu-raven'
 favicon            = require 'serve-favicon'
-bodyParser         = require 'body-parser'
 meshbluHealthcheck = require 'express-meshblu-healthcheck'
 expressVersion     = require 'express-package-version'
 
@@ -27,9 +27,11 @@ class Express
 
   _raven: =>
     @octobluRaven ?= new OctobluRaven
-    @octobluRaven.expressBundle { app: @_app }
+    @ravenExpress = @octobluRaven.express()
 
   _middlewares: =>
+    @_app.use @ravenExpress.sendErrorHandler()
+    @_app.use @ravenExpress.meshbluAuthContext()
     @_app.use compression()
     @_app.use meshbluHealthcheck()
     @_app.use expressVersion format: '{"version": "%s"}'
@@ -39,5 +41,8 @@ class Express
     @_app.use bodyParser.json { limit: @bodyLimit }
     @_app.use cors() unless @disableCors
     @_app.options '*', cors() unless @disableCors
+    @_app.use @ravenExpress.requestHandler()
+    @_app.use @ravenExpress.errorHandler()
+    @_app.use @ravenExpress.badRequestHandler()
 
 module.exports = Express

@@ -1,6 +1,6 @@
 {
   "name": "express-octoblu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express with common Octoblu middlewares",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "express-meshblu-healthcheck": "^1.0.1",
     "express-package-version": "0.0.2",
     "morgan": "^1.7.0",
-    "octoblu-raven": "^4.0.1",
+    "octoblu-raven": "^4.0.2",
     "serve-favicon": "^2.3.0"
   }
 }
