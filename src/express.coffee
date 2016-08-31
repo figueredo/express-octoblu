@@ -10,7 +10,10 @@ meshbluHealthcheck = require 'express-meshblu-healthcheck'
 expressVersion     = require 'express-package-version'
 
 class Express
-  constructor: ({ @disableLogging, @disableCors, @octobluRaven, @faviconPath, @bodyLimit }={}) ->
+  constructor: (options={}) ->
+    { @disableLogging, @disableCors } = options
+    { @faviconPath, @bodyLimit } = options
+    { @octobluRaven, @logFn } = options
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
     @faviconPath ?= path.join(__dirname, '..', 'assets', 'favicon.ico')
     @bodyLimit ?= '1mb'
@@ -26,8 +29,9 @@ class Express
     return response.statusCode < 300
 
   _raven: =>
-    @octobluRaven ?= new OctobluRaven
+    @octobluRaven ?= new OctobluRaven { @logFn }
     @ravenExpress = @octobluRaven.express()
+    @octobluRaven.patchGlobal()
 
   _middlewares: =>
     @_app.use @ravenExpress.sendErrorHandler()

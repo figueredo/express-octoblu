@@ -15,11 +15,12 @@ Express with common Octoblu middlewares
   * [Install](#install)
 * [Usage](#usage)
 * [Bundled Packages](#bundled-packages)
+* [Bundled Middlewares](#bundled-middlewares)
 * [License](#license)
 
 # Introduction
 
-Express bundled with common Octoblu middlewares.
+Express bundled with common Octoblu middlewares. It also handles `uncaughtExceptions` using raven.
 
 # Getting Started
 
@@ -36,10 +37,11 @@ npm install --save express-octoblu
 All options are optional and have default values.
 
 **disableLogging** - defaults to `false`
-**octobluRaven** - defaults to `new OctobluRaven()`
+**disableCors** - defaults to `false`
+**logFn** - defaults to `console.error`
 **bodyLimit** - defaults to `1mb`
-**disableCors** - defaults to `false`,
 **faviconPath** - defaults to the bundled octoblu favicon.ico.
+**octobluRaven** - defaults to `new OctobluRaven()`
 
 ```coffee
 octobluExpress = require 'express-octoblu'
@@ -55,15 +57,19 @@ app.listen PORT, =>
 
 ```
 
+
 # Bundled Packages
 
 * [express](https://github.com/expressjs/express)
+* [octoblu-raven](https://github.com/octoblu/node-octoblu-raven)
+
+# Bundled Middlewares
+
 * [express-meshblu-healthcheck](https://github.com/octoblu/express-meshblu-healthcheck)
 * [express-package-version](https://github.com/rjz/express-package-version)
 * [compression](https://github.com/expressjs/compression)
 * [morgan](https://github.com/expressjs/morgan)
 * [body-parser](https://github.com/expressjs/body-parser)
-* [octoblu-raven](https://github.com/octoblu/node-octoblu-raven)
 * [serve-favicon](https://github.com/expressjs/serve-favicon)
 * [cors](https://github.com/expressjs/cors)
 
