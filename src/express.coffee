@@ -29,7 +29,7 @@ class Express
     return response.statusCode < 300
 
   _raven: =>
-    @octobluRaven ?= new OctobluRaven { @logFn }
+    @octobluRaven ?= new OctobluRaven {}, { @logFn }
     @ravenExpress = @octobluRaven.express()
     @octobluRaven.patchGlobal()
 
