@@ -8,6 +8,12 @@ describe 'Octoblu Express', ->
   beforeEach (done) ->
     app = octobluExpress({ disableLogging: true })
 
+    app.get '/throw/error', (req, res) =>
+      throw new Error 'hello'
+
+    app.get '/uncaught/error', (req, res) =>
+      unknownfunc 'called with'
+
     app.get '/success', (req, res) =>
       res.sendStatus(204)
 
@@ -27,6 +33,32 @@ describe 'Octoblu Express', ->
 
   afterEach ->
     @server.destroy()
+
+  describe 'GET /uncaught/error', ->
+    beforeEach (done) ->
+      options = {
+        @baseUrl,
+        uri: '/uncaught/error',
+        json: true,
+      }
+      request.get options, (error, @response, @body) =>
+        done error
+
+    it 'should have a 500 status code', ->
+      expect(@response.statusCode).to.equal 500
+
+  describe 'GET /throw/error', ->
+    beforeEach (done) ->
+      options = {
+        @baseUrl,
+        uri: '/throw/error',
+        json: true,
+      }
+      request.get options, (error, @response, @body) =>
+        done error
+
+    it 'should have a 500 status code', ->
+      expect(@response.statusCode).to.equal 500
 
   describe 'GET /success', ->
     beforeEach (done) ->
