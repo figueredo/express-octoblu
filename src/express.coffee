@@ -11,7 +11,7 @@ expressVersion     = require 'express-package-version'
 
 class Express
   constructor: (options={}) ->
-    { @disableLogging, @disableCors } = options
+    { @disableLogging, @disableCors, @logSuccesses } = options
     { @faviconPath, @bodyLimit } = options
     { @octobluRaven, @logFn } = options
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
@@ -26,6 +26,7 @@ class Express
 
   _skip: (request, response) =>
     return true if @disableLogging
+    return false if @logSuccesses
     return response.statusCode < 300
 
   _raven: =>
