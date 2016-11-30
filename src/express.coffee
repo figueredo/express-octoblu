@@ -14,7 +14,10 @@ class Express
     { @disableLogging, @disableCors, @logSuccesses } = options
     { @faviconPath, @bodyLimit } = options
     { @octobluRaven, @logFn } = options
+    { @logFormat } = options
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
+    @logSuccesses ?= process.env.LOG_SUCCESSES == "true"
+    @logFormat ?= 'dev'
     @faviconPath ?= path.join(__dirname, '..', 'assets', 'favicon.ico')
     @bodyLimit ?= '1mb'
     @_app = express()
@@ -27,7 +30,10 @@ class Express
   _skip: (request, response) =>
     return true if @disableLogging
     return false if @logSuccesses
-    return response.statusCode < 300
+    responseTime = morgan['response-time']?(request, response)
+    return false if responseTime > 1000
+    return false if response.statusCode < 300
+    return true
 
   _raven: =>
     @octobluRaven ?= new OctobluRaven {}, { @logFn }
@@ -40,7 +46,7 @@ class Express
     @_app.use compression()
     @_app.use meshbluHealthcheck()
     @_app.use expressVersion format: '{"version": "%s"}'
-    @_app.use morgan 'dev', { immediate: false, skip: @_skip }
+    @_app.use morgan @logFormat, { immediate: false, skip: @_skip }
     @_app.use favicon @faviconPath
     @_app.use bodyParser.urlencoded { limit: @bodyLimit, extended: true }
     @_app.use bodyParser.json { limit: @bodyLimit }
