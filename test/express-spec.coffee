@@ -27,7 +27,7 @@ describe 'Octoblu Express', ->
       return res.sendStatus(422) unless _.isPlainObject(req.body)
       return res.sendStatus(204)
 
-    @server = app.listen undefined, done
+    @server = app.listen null, done
     enableDestroy @server
     @baseUrl = "http://localhost:#{@server.address().port}"
 

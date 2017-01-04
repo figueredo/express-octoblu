@@ -17,6 +17,7 @@ class Express
     { @logFormat } = options
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
     @logSuccesses ?= process.env.LOG_SUCCESSES == "true"
+    @slowLoggingMin ?= parseInt(process.env.SLOW_LOGGING_MIN || 1000)
     @logFormat ?= 'dev'
     @faviconPath ?= path.join(__dirname, '..', 'assets', 'favicon.ico')
     @bodyLimit ?= '1mb'
@@ -31,7 +32,7 @@ class Express
     return true if @disableLogging
     return false if @logSuccesses
     responseTime = morgan['response-time']?(request, response)
-    return false if responseTime > 1000
+    return false if responseTime > @slowLoggingMin
     return false if response.statusCode < 300
     return true
 
