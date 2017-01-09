@@ -18,6 +18,7 @@ class Express
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
     @logSuccesses ?= process.env.LOG_SUCCESSES == "true"
     @slowLoggingMin ?= parseInt(process.env.SLOW_LOGGING_MIN || 1000)
+    @logFormat ?= 'short' if process.env.NODE_ENV == 'production'
     @logFormat ?= 'dev'
     @faviconPath ?= path.join(__dirname, '..', 'assets', 'favicon.ico')
     @bodyLimit ?= '1mb'
@@ -29,17 +30,18 @@ class Express
     return @_app
 
   _skip: (request, response) =>
-    return true if @disableLogging
-    return false if @logSuccesses
+    shouldLog=false
+    shouldNotLog=true
+    return shouldNotLog if @disableLogging
+    return shouldLog if @logSuccesses
     responseTime = morgan['response-time']?(request, response)
-    return false if responseTime > @slowLoggingMin
-    return false if response.statusCode < 300
-    return true
+    return shouldLog if responseTime > @slowLoggingMin
+    return shouldLog if response.statusCode > 300
+    return shouldNotLog
 
   _raven: =>
     @octobluRaven ?= new OctobluRaven {}, { @logFn }
     @ravenExpress = @octobluRaven.express()
-    @octobluRaven.patchGlobal()
 
   _middlewares: =>
     @_app.use @ravenExpress.sendErrorHandler()

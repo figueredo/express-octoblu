@@ -1,6 +1,6 @@
 {
   "name": "express-octoblu",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "Express with common Octoblu middlewares",
   "main": "index.js",
   "scripts": {
