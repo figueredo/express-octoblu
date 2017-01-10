@@ -309,6 +309,13 @@ encodeurl@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.1.tgz#79e3d58655346909fe6f0f45a5de68103b294d20"
 
+errorhandler@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/errorhandler/-/errorhandler-1.5.0.tgz#eaba64ca5d542a311ac945f582defc336165d9f4"
+  dependencies:
+    accepts "~1.3.3"
+    escape-html "~1.0.3"
+
 escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
@@ -842,12 +849,13 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-octoblu-raven@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/octoblu-raven/-/octoblu-raven-4.1.0.tgz#d0a1143fc143654d7e9fde6a84f10f67ab8aa8fb"
+octoblu-raven@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/octoblu-raven/-/octoblu-raven-5.0.0.tgz#f6bfd44254e352a25cf73cab7b5b57b71fc765eb"
   dependencies:
     coffee-script "^1.11.1"
     debug "^2.2.0"
+    errorhandler "^1.5.0"
     lodash "^4.16.4"
     on-finished "^2.3.0"
     raven "~0.12.1"
