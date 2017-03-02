@@ -1,6 +1,6 @@
 {
   "name": "express-octoblu",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Express with common Octoblu middlewares",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/octoblu/express-octoblu#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "coffee-coverage": "^1.0.1",
+    "coffee-coverage": "^2.0.1",
     "istanbul": "^0.4.5",
     "lodash": "^4.17.4",
     "mocha": "^3.2.0",
@@ -33,15 +33,15 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "body-parser": "^1.15.2",
-    "coffee-script": "^1.12.2",
+    "body-parser": "^1.17.0",
+    "coffee-script": "^1.12.4",
     "compression": "^1.6.2",
     "cors": "^2.8.0",
-    "express": "^4.14.0",
+    "express": "^4.15.0",
     "express-meshblu-healthcheck": "^1.0.1",
     "express-package-version": "0.0.2",
-    "morgan": "^1.7.0",
+    "morgan": "^1.8.1",
     "octoblu-raven": "^5.0.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.4.1"
   }
 }
