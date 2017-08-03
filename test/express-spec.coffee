@@ -1,3 +1,4 @@
+{describe,beforeEach,afterEach,it,expect} = global
 _              = require 'lodash'
 request        = require 'request'
 enableDestroy  = require 'server-destroy'
@@ -8,10 +9,10 @@ describe 'Octoblu Express', ->
   beforeEach (done) ->
     app = octobluExpress({ disableLogging: true })
 
-    app.get '/throw/error', (req, res) =>
+    app.get '/throw/error', =>
       throw new Error 'hello'
 
-    app.get '/uncaught/error', (req, res) =>
+    app.get '/uncaught/error', =>
       unknownfunc 'called with'
 
     app.get '/success', (req, res) =>
@@ -27,7 +28,7 @@ describe 'Octoblu Express', ->
       return res.sendStatus(422) unless _.isPlainObject(req.body)
       return res.sendStatus(204)
 
-    @server = app.listen null, done
+    @server = app.listen undefined, done
     enableDestroy @server
     @baseUrl = "http://localhost:#{@server.address().port}"
 
@@ -134,18 +135,6 @@ describe 'Octoblu Express', ->
 
     it 'should have the right body', ->
       expect(@body).to.deep.equal testResponse
-
-  describe 'GET /favicon.ico', ->
-    beforeEach (done) ->
-      options = {
-        @baseUrl,
-        uri: '/favicon.ico'
-      }
-      request.get options, (error, @response, @body) =>
-        done error
-
-    it 'should have a 200 status code', ->
-      expect(@response.statusCode).to.equal 200
 
   describe 'GET /favicon.ico', ->
     beforeEach (done) ->

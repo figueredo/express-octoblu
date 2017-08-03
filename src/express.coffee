@@ -10,11 +10,23 @@ meshbluHealthcheck = require 'express-meshblu-healthcheck'
 expressVersion     = require 'express-package-version'
 
 class Express
-  constructor: (options={}) ->
-    { @disableLogging, @disableCors, @logSuccesses } = options
-    { @faviconPath, @bodyLimit } = options
-    { @octobluRaven, @logFn } = options
-    { @logFormat } = options
+  constructor: (options) ->
+    @_setOptions options
+    app = express()
+    @_raven { app }
+    @_middlewares { app }
+    return app
+
+  _setOptions: (options={}) =>
+    {
+      @disableLogging,
+      @disableCors,
+      @logSuccesses,
+      @faviconPath,
+      @bodyLimit,
+      @logFn,
+      @logFormat,
+    } = options
     @disableLogging ?= process.env.DISABLE_LOGGING == "true"
     @logSuccesses ?= process.env.LOG_SUCCESSES == "true"
     @slowLoggingMin ?= parseInt(process.env.SLOW_LOGGING_MIN || 1000)
@@ -22,12 +34,10 @@ class Express
     @logFormat ?= 'dev'
     @faviconPath ?= path.join(__dirname, '..', 'assets', 'favicon.ico')
     @bodyLimit ?= '1mb'
-    @_app = express()
-    @_raven()
-    @_middlewares()
 
-  app: =>
-    return @_app
+  _raven: ({ app }) =>
+    octobluRaven = new OctobluRaven({ @logFn })
+    octobluRaven.handleExpress({ app })
 
   _skip: (request, response) =>
     shouldLog=false
@@ -39,24 +49,15 @@ class Express
     return shouldLog if response.statusCode > 300
     return shouldNotLog
 
-  _raven: =>
-    @octobluRaven ?= new OctobluRaven {}, { @logFn }
-    @ravenExpress = @octobluRaven.express()
-
-  _middlewares: =>
-    @_app.use @ravenExpress.sendErrorHandler()
-    @_app.use @ravenExpress.meshbluAuthContext()
-    @_app.use compression()
-    @_app.use meshbluHealthcheck()
-    @_app.use expressVersion format: '{"version": "%s"}'
-    @_app.use morgan @logFormat, { immediate: false, skip: @_skip }
-    @_app.use favicon @faviconPath
-    @_app.use bodyParser.urlencoded { limit: @bodyLimit, extended: true }
-    @_app.use bodyParser.json { limit: @bodyLimit }
-    @_app.use cors() unless @disableCors
-    @_app.options '*', cors() unless @disableCors
-    @_app.use @ravenExpress.requestHandler()
-    @_app.use @ravenExpress.errorHandler()
-    @_app.use @ravenExpress.badRequestHandler()
+  _middlewares: ({ app }) =>
+    app.use compression()
+    app.use meshbluHealthcheck()
+    app.use expressVersion format: '{"version": "%s"}'
+    app.use morgan @logFormat, { immediate: false, skip: @_skip }
+    app.use favicon @faviconPath
+    app.use bodyParser.urlencoded { limit: @bodyLimit, extended: true }
+    app.use bodyParser.json { limit: @bodyLimit }
+    app.use cors() unless @disableCors
+    app.options '*', cors() unless @disableCors
 
 module.exports = Express

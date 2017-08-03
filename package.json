@@ -1,6 +1,6 @@
 {
   "name": "express-octoblu",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "Express with common Octoblu middlewares",
   "main": "index.js",
   "scripts": {
@@ -21,27 +21,27 @@
   },
   "homepage": "https://github.com/octoblu/express-octoblu#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.1.0",
     "coffee-coverage": "^2.0.1",
     "istanbul": "^0.4.5",
     "lodash": "^4.17.4",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.0",
     "mocha-istanbul": "^0.3.0",
-    "request": "^2.74.0",
+    "request": "^2.81.0",
     "server-destroy": "^1.0.1",
-    "sinon": "^1.17.7",
-    "sinon-chai": "^2.8.0"
+    "sinon": "^3.0.0",
+    "sinon-chai": "^2.12.0"
   },
   "dependencies": {
-    "body-parser": "^1.17.0",
-    "coffee-script": "^1.12.4",
-    "compression": "^1.6.2",
-    "cors": "^2.8.0",
-    "express": "^4.15.0",
+    "body-parser": "^1.17.2",
+    "coffee-script": "^1.12.7",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
     "express-meshblu-healthcheck": "^1.0.1",
     "express-package-version": "0.0.2",
-    "morgan": "^1.8.1",
-    "octoblu-raven": "^5.0.0",
-    "serve-favicon": "^2.4.1"
+    "morgan": "^1.8.2",
+    "octoblu-raven": "^6.0.1",
+    "serve-favicon": "^2.4.3"
   }
 }
