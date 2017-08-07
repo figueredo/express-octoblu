@@ -1,6 +1,6 @@
 {
   "name": "express-octoblu",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Express with common Octoblu middlewares",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,6 @@
     "mocha": "^3.5.0",
     "mocha-istanbul": "^0.3.0",
     "request": "^2.81.0",
-    "server-destroy": "^1.0.1",
     "sinon": "^3.0.0",
     "sinon-chai": "^2.12.0"
   },
@@ -42,6 +41,7 @@
     "express-package-version": "0.0.2",
     "morgan": "^1.8.2",
     "octoblu-raven": "^6.0.2",
-    "serve-favicon": "^2.4.3"
+    "serve-favicon": "^2.4.3",
+    "server-destroy": "^1.0.1"
   }
 }
