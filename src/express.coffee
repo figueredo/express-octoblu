@@ -5,6 +5,7 @@ express            = require 'express'
 bodyParser         = require 'body-parser'
 compression        = require 'compression'
 OctobluRaven       = require 'octoblu-raven'
+enableDestroy      = require 'server-destroy'
 favicon            = require 'serve-favicon'
 meshbluHealthcheck = require 'express-meshblu-healthcheck'
 expressVersion     = require 'express-package-version'
@@ -13,6 +14,7 @@ class Express
   constructor: (options) ->
     @_setOptions options
     app = express()
+    enableDestroy app
     @_raven { app }
     @_middlewares { app }
     return app
