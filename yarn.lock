@@ -371,9 +371,9 @@ etag@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.0.tgz#6f631aef336d6c46362b51764044ce216be3c051"
 
-express-meshblu-healthcheck@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/express-meshblu-healthcheck/-/express-meshblu-healthcheck-1.0.1.tgz#f72e7ecb7e912065d1e915ced64af001ac88220f"
+express-meshblu-healthcheck@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/express-meshblu-healthcheck/-/express-meshblu-healthcheck-1.0.4.tgz#ef1b047eb9d5b5e2377d8f6b07765d482d9c816d"
   dependencies:
     coffee-script "^1.9.1"
 
@@ -1111,9 +1111,9 @@ sinon-chai@^2.12.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/sinon-chai/-/sinon-chai-2.12.0.tgz#da71e9642ef7b893ba3cf2af806396a00aa45927"
 
-sinon@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/sinon/-/sinon-3.0.0.tgz#f6919755c8c705e0b4ae977e8351bbcbaf6d91de"
+sinon@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/sinon/-/sinon-3.2.0.tgz#8848a66ab6e8b80b5532e3824f59f83ea2628c77"
   dependencies:
     diff "^3.1.0"
     formatio "1.2.0"
