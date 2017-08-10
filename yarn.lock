@@ -192,10 +192,6 @@ coffee-script@^1.12.7:
   version "1.12.7"
   resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.7.tgz#c05dae0cb79591d05b3070a8433a98c9a89ccc53"
 
-coffee-script@^1.9.1:
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/coffee-script/-/coffee-script-1.12.2.tgz#0d4cbdee183f650da95419570c4929d08ef91376"
-
 combined-stream@^1.0.5, combined-stream@~1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.5.tgz#938370a57b4a51dea2c77c15d5c5fdf895164009"
@@ -371,11 +367,9 @@ etag@~1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.0.tgz#6f631aef336d6c46362b51764044ce216be3c051"
 
-express-meshblu-healthcheck@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/express-meshblu-healthcheck/-/express-meshblu-healthcheck-1.0.4.tgz#ef1b047eb9d5b5e2377d8f6b07765d482d9c816d"
-  dependencies:
-    coffee-script "^1.9.1"
+express-meshblu-healthcheck@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/express-meshblu-healthcheck/-/express-meshblu-healthcheck-1.0.6.tgz#8624b788ba4094ee9a5e08605dadcad63c34f71a"
 
 express-package-version@0.0.2:
   version "0.0.2"
